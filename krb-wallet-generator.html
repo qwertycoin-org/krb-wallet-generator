@@ -10750,7 +10750,7 @@ html { font-family: sans-serif }
                          style="line-height: 25px; height: 25px; font-size: 60%; padding: 0px 1.5rem;"/>
                     </span>
 
-                    <p>This is the address you give to third parties to send monero to you.
+                    <p>This is the address you give to third parties to send Karbo to you.
                         <br><b>It is the only information here that's meant to be public.</b>
                     </p>
                 </div>
@@ -10833,7 +10833,7 @@ html { font-family: sans-serif }
                     <br>
                 <pre>4AfUP827TeRZ1cck3tZThgZbRCEwBrpcJTkA1LCiyFVuMH4b5y59bKMZHGb9y58K3gSjWDCBsB4RkGsGDhsmMG5R2qmbLeW</pre>
 				
-				<pre>Kawa</pre>
+				<pre>KawA9rnrZpTBDXhu5xKrZv7aKnFM4CgX1YxqkRo4k5tVUxMB2yCwhA3eEw7EivcMkChyWF7CwexLjAr5MzJAEDzaLvx2dK1</pre>
 
                 </p>
 
@@ -10888,7 +10888,7 @@ function genwallet(lang)
   mnemonic_widget.innerHTML = mnemonic;
 
   qr=new QRCode(address_qr_widget, {correctLevel:QRCode.CorrectLevel.L});
-  qr.makeCode("monero:"+keys.public_addr);
+  qr.makeCode("karbowanec:"+keys.public_addr);
 }
 
 previous_button_text = "";
@@ -10930,7 +10930,7 @@ function genwallet_prefix_worker()
   wallet_keys_widget.innerHTML = keys.privateKeys;
   
   qr=new QRCode(address_qr_widget, {correctLevel:QRCode.CorrectLevel.L});
-  qr.makeCode("monero:"+keys.public_addr);
+  qr.makeCode("karbowanec:"+keys.public_addr);
 }
 
 var zerohex="0000000000000000000000000000000000000000000000000000000000000000";
