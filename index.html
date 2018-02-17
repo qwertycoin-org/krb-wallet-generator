@@ -94,7 +94,7 @@
 -->
 
 <head>
-  <title>Karbovanets offline wallet generator</title>
+  <title>Qwertycoin [QWC] offline wallet generator</title>
   <meta charset="UTF-8">
     <style type="text/css">
         html {
@@ -3880,7 +3880,7 @@
             display: inline-block;
             font-size: 2.1rem;
             padding: 0;
-			color: #15315e;
+            color: #15315e;
         }
 
         nav .brand-logo.center {
@@ -8539,11 +8539,11 @@ return{_strlen:lb,_ge_mul8:Va,_keccak:db,_ge_scalarmult:Ta,_ge_fromfe_frombytes_
 
 var salt = '4721283fee2db41e1f2fc50ea9f6d783'; // IMPORTANT: never change it, otherwise it will be impossible to restore previously generated wallets!
 var config = {
-    coinUnitPlaces: 12,
-    coinSymbol: 'KRB',
-    coinName: 'Karbowanec',
-    coinUriPrefix: 'karbowanec:',
-    addressPrefix: 111
+    coinUnitPlaces: 8,
+    coinSymbol: 'QWC',
+    coinName: 'Qwertycoin',
+    coinUriPrefix: 'qwertycoin:',
+    addressPrefix: '0x14820c'
 };
 var cnUtil = (function(initConfig) {
     //var config = $.extend({}, initConfig);
@@ -8735,18 +8735,18 @@ var cnUtil = (function(initConfig) {
         keys.spend = this.generate_keys(first);
         // this is monero style
         // var second = this.keccak(keys.spend.sec, 32, 32);
-        // Karbowanec paperwallet compatible
+        // Qwertycoin paperwallet compatible
         var second = this.keccak(first, 32, 32);
         keys.view = this.generate_keys(second);
         keys.public_addr = this.pubkeys_to_string(keys.spend.pub, keys.view.pub);
-	
-	var prefix = this.encode_varint(CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX);
-  	var privateKeyBase = prefix + keys.spend.pub + keys.view.pub + keys.spend.sec + keys.view.sec; // Karbowanec privateKeyBase
+    
+    var prefix = this.encode_varint(CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX);
+    var privateKeyBase = prefix + keys.spend.pub + keys.view.pub + keys.spend.sec + keys.view.sec; // Qwertycoin privateKeyBase
     var checksum = this.cn_fast_hash(privateKeyBase).slice(0, ADDRESS_CHECKSUM_SIZE * 2);
     
-	keys.privateKeys = cnBase58.encode(privateKeyBase + checksum);
-		
-		
+    keys.privateKeys = cnBase58.encode(privateKeyBase + checksum);
+        
+        
         return keys;
     };
 
@@ -8763,22 +8763,22 @@ var cnUtil = (function(initConfig) {
         if (public_addr.toUpperCase().slice(0, prefix.length) != prefix.toUpperCase())
           return null;
         // var second = this.keccak(keys.spend.sec, 32, 32);
-        // Karbowanec paperwallet compatible
+        // Qwertycoin paperwallet compatible
         var second = this.keccak(first, 32, 32);
         keys.view = this.generate_keys(second);
         keys.public_addr = this.pubkeys_to_string(keys.spend.pub, keys.view.pub);
 
-		
-	
-	var prefix = this.encode_varint(CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX);
-  	var privateKeyBase = prefix + keys.spend.pub + keys.view.pub + keys.spend.sec + keys.view.sec; // Karbowanec privateKeyBase
+        
+    
+    var prefix = this.encode_varint(CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX);
+    var privateKeyBase = prefix + keys.spend.pub + keys.view.pub + keys.spend.sec + keys.view.sec; // Qwertycoin privateKeyBase
     var checksum = this.cn_fast_hash(privateKeyBase).slice(0, ADDRESS_CHECKSUM_SIZE * 2);
     
-	keys.privateKeys = cnBase58.encode(privateKeyBase + checksum);
-	
-	
-	
-		
+    keys.privateKeys = cnBase58.encode(privateKeyBase + checksum);
+    
+    
+    
+        
         return keys;
     };
 
@@ -10691,24 +10691,24 @@ html { font-family: sans-serif }
 }
 
 #coinIcon{
-	text-transform: capitalize;
-	width: 1.3em;
-	height: 1.3em;
-	line-height: 1.2em;
-	display: inline-block;
-	vertical-align: middle;
-	color: #15315e;
-	border: 2px solid #15315e;
-	border-radius: 50%;
-	text-align: center;
-	margin-top: 0px;
+    text-transform: capitalize;
+    width: 1.3em;
+    height: 1.3em;
+    line-height: 1.2em;
+    display: inline-block;
+    vertical-align: middle;
+    color: #15315e;
+    border: 2px solid #15315e;
+    border-radius: 50%;
+    text-align: center;
+    margin-top: 0px;
 }
 </style>
 
 <nav class="grey lighten-3">
     <div class="nav-wrapper">
         <a href="#" class="brand-logo center">
-			<span id="coinIcon">&#1180;</span> Карбованець
+            Qwertycoin
         </a>
 
     </div>
@@ -10725,27 +10725,19 @@ html { font-family: sans-serif }
     <div class="row">
         <div class="col s12">
             <p>
-                This page generates a new <a href="http://karbowanec.com/">Karbowanec</a> wallet. It is self contained and
+                This page generates a new <a href="https://qwertycoin.org/">Qwertycoin</a> wallet. It is self contained and
                 does all the necessary calculations locally, so is suitable for generating a new wallet on a machine
                 that is not connected to the network, and may even never be. This way, you can create
-                a Karbowanec wallet without risking the keys.
+                a Qwertycoin wallet without risking the keys.
             </p>
         </div>
     </div>
     <div class="row valign-wrapper">
-        <div class="col s4 right-align ">
+        <div class="col s10 left-align ">
                 <input class="btn orange" type="button" onclick="js:genwallet(null);"
                        value="Generate wallet" action=""/>
                 <p>Custom entropy (leave empty to use PRNG)</p>
                 <input type="text" value="" id="user_entropy_widget" />
-        </div>
-        <div class="col s1 offset-s1"><h4>or</h4></div>
-        <div class="col s5 offset-s1">
-            <form>
-                <input class="btn deep-orange" type="button" onclick="js:genwallet_prefix();" value="Generate wallet with prefix" action="" id="gen_prefix_widget"/>
-                <p>(very slow for more than a few characters)</p>
-                <input type="text" value="K" id="prefix_widget" oninput="js:check_prefix_validity()"; />
-            </form>
         </div>
     </div>
     <div class="row center-align">
@@ -10770,7 +10762,7 @@ html { font-family: sans-serif }
                          style="line-height: 25px; height: 25px; font-size: 60%; padding: 0px 1.5rem;"/>
                     </span>
 
-                    <p>This is the address you give to third parties to send Karbo to you.
+                    <p>This is the address you give to third parties to send QWC to you.
                         <br><b>It is the only information here that's meant to be public.</b>
                     </p>
                 </div>
@@ -10790,9 +10782,9 @@ html { font-family: sans-serif }
                         The mnemonic seed is a string that comprises 25 words and allows you to recreate your
                         private keys. <b>Keep it secure!</b>
                     </p>
-					<p>
-						To restore keys from mnemonic seed use Restore tab in Karbowanec paperwallet at <a href="http://paperwallet.karbowanec.com/">paperwallet.karbowanec.com</a>.
-					</p>
+                    <p>
+                        To restore keys from mnemonic seed use Restore tab in Qwertycoin paperwallet at <a href="https://paperwallet.qwertycoin.org/">paperwallet.qwertycoin.com</a>.
+                    </p>
                 </div>
                 <div class="card-action center-align">
                     <h5 class="grey-text text-darken-4" id="mnemonic_widget">Generating... </h5>
@@ -10810,8 +10802,8 @@ html { font-family: sans-serif }
                         The spend key and view key are the raw private keys for the
                         new wallet.
                         
-						<strong>Keys for GUI Wallet</strong> can be imported into wallet in File > Import private key
-						
+                        <strong>Keys for GUI Wallet</strong> can be imported into wallet in File > Import private key
+                        
                     </p>
                     <br>
                     <table>
@@ -10824,14 +10816,14 @@ html { font-family: sans-serif }
                             <td><pre>View key:</pre></td>
                             <td><pre id="view_key_widget">Generating...</pre></td>
                         </tr>
-						
-						<tr>
+                        
+                        <tr>
                             <td><pre>Keys for GUI Wallet:</pre></td>
                             <td><pre id="wallet_keys_widget">Generating...</pre></td>
                         </tr>
-						
-						
-						
+                        
+                        
+                        
                         </tbody>
                     </table>
                 </div>
@@ -10848,20 +10840,13 @@ html { font-family: sans-serif }
             <div class="col l12">
                 <h5>Credits</h5>
                 <p>
-                    Made by moneromooo, based on code from <a href="https://mymonero.com/">MyMonero</a>. Adapted for Karbovanets by Aiw&euml;. Copyright notices in the source.
+                    Made by moneromooo, based on code from <a href="https://mymonero.com/">MyMonero</a>. Adapted for Qwertycoin by Aiw&euml;. Copyright notices in the source.
                     <br>
                     Thanks to antanst for the CSS, and to luigi1111 for crypto fixes and improvements.
-                    <br>
-                    If you found this useful, a donation would be appreciated:
-                    <br>
-                <pre>4AfUP827TeRZ1cck3tZThgZbRCEwBrpcJTkA1LCiyFVuMH4b5y59bKMZHGb9y58K3gSjWDCBsB4RkGsGDhsmMG5R2qmbLeW</pre>
-				
-				<pre>KawA9rnrZpTBDXhu5xKrZv7aKnFM4CgX1YxqkRo4k5tVUxMB2yCwhA3eEw7EivcMkChyWF7CwexLjAr5MzJAEDzaLvx2dK1</pre>
-
                 </p>
 
 
-			</div>
+            </div>
         </div>
     </div>
 </footer>
@@ -10897,13 +10882,13 @@ function genwallet(lang)
     var user_entropy = user_entropy_widget.value;
     if (user_entropy === "") {
       seed = cnUtil.sc_reduce32(cnUtil.rand_32());
-	}
+    }
     else {
       seed = cnUtil.sc_reduce32(poor_mans_kdf(user_entropy));
     }
-	var passPhrase = mn_encode(seed,current_lang);
-	var words = getStringWords(passPhrase);
-	seed = CryptoJS.SHA256(salt + words.join(' ')).toString();
+    var passPhrase = mn_encode(seed,current_lang);
+    var words = getStringWords(passPhrase);
+    seed = CryptoJS.SHA256(salt + words.join(' ')).toString();
     keys = cnUtil.create_address(seed);
   }
   mnemonic = passPhrase;
@@ -10927,9 +10912,9 @@ function genwallet_prefix_worker()
   while (true) {
     attempts++;
     seed = cnUtil.sc_reduce32(cnUtil.rand_32());
-	var passPhrase = mn_encode(seed,current_lang);
-	var words = getStringWords(passPhrase);
-	seed = CryptoJS.SHA256(salt + words.join(' ')).toString();
+    var passPhrase = mn_encode(seed,current_lang);
+    var words = getStringWords(passPhrase);
+    seed = CryptoJS.SHA256(salt + words.join(' ')).toString();
     keys = cnUtil.create_address_if_prefix(seed,prefix);
     if (keys != null) {
       gen_prefix_widget = document.getElementById("gen_prefix_widget");
